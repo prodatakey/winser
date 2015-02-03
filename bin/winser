@@ -293,7 +293,8 @@ async.series([
     },
     function(next){
         if (options.env && options.env.length > 0){
-            nssmExec('set', 'AppEnvironmentExtra "' + options.env.join(' ') + '"',
+			var values = Array.isArray(options.env) ? options.env.join(' ') : options.env;
+            nssmExec('set', 'AppEnvironmentExtra ' + values,
                 function(error){
                     if (error){
                         next('Can\'t set environment for service');
